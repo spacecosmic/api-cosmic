@@ -9,7 +9,7 @@
 </p>
 
 ## About Cosmic API
-"Cosmic API" is a REST API, built on [Laravel 8](https://laravel.com/docs/8.x/installation)
+"Cosmic API" is a REST API, built on [Laravel 8](https://laravel.com/docs/8.x/installation) and developed by **Cosmic Team** a ***Cosmic Space™*** specialist group.
 
 Built to meet the requirements of any type of platform. Able to perform the 4 operations of the REST protocol: GET, POST, PUT and DELETE.
 
@@ -20,8 +20,9 @@ name | The name of product.
 description | A brief description of the registered product.
 price | The price of product.
 image | Product display image.
+quantity | The quantity of products remaining.
+line | The product line.
 pass | Administrator password to delete all database records.
-
 
 
 ## 1. Get Product (GET)
