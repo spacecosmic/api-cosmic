@@ -9,9 +9,10 @@
 </p>
 
 ## About Cosmic API
-"Cosmic API" is a REST API, built on [Laravel 8](https://laravel.com/docs/8.x/installation) and developed by **Cosmic Team** a ***Cosmic Space™*** specialist group.
 
-Built to meet the requirements of any type of platform. Able to perform the 4 operations of the REST protocol: GET, POST, PUT and DELETE.
+"Cosmic API" is a REST API, built on Laravel 8 and developed by **Cosmic Core Team**, a group of API experts from ***Cosmic Space™***.
+
+Built to meet the requirements of any type of platform. Able to perform the 4 operations of the **REST** protocol: GET, POST, PUT and DELETE.
 
 Field | Description
 ------|------------
@@ -19,26 +20,26 @@ Field | Description
 name | The name of product.
 description | A brief description of the registered product.
 price | The price of product.
+color | The product color.
 image | Product display image.
 quantity | The quantity of products remaining.
 line | The product line.
-pass | Administrator password to delete all database records.
+pass | Administrator password to delete database records.
 
 
 ## 1. Get Product (GET)
 
-
 - #### Specific product
 ```url
-    http://tecpaper.tk/tecpaper/public/api/products?id={id}
+    https://api-cosmic.herokuapp.com/products?id={id}
 ```
 
 ```JSON
-// http://tecpaper.tk/tecpaper/public/api/products?id=1122
+// https://api-cosmic.herokuapp.com/products?id=1122
 { 
     "id": 1122,
-    "name": "Sapato social",
-    "description": "Utilizado para trabalho e festas reservadas.",
+    "name": "Mouse Gamer",
+    "description": "Degign e conforto para suas jogatinas.",
     "price": 39.9,
     "image": "/tecpaper/public/img/upload/1122/image.jpg",
     "created_at": "2021-03-25T15:13:05.000000Z",
@@ -48,46 +49,44 @@ pass | Administrator password to delete all database records.
 
 - #### All products
 ```url
-    http://tecpaper.tk/tecpaper/public/api/products/
+    https://api-cosmic.herokuapp.com/products
 ```
 
 ```JSON
 [
     {
-        "id" : "7891040091027",
-        "name" : "Mini post-it",
-        "description" : "Notas auto-adesivas removíveis. 4 blocos de 100 folhas.",
-        "price" : 4.25,
-        "image": "/img/7891040091027/image.jpg",
+        "id": 1122,
+        "name": "Mouse gamer nebulosa",
+        "description": "design e conforto para suas jogatinas",
+        "price": 39.9,
+        "color": "Preto",
+        "quantity": 25,
+        "line": "Nebulosa",
+        "image": "/tecpaper/public/img/upload/1122/image.jpg",
         "created_at": "2021-03-25T15:13:05.000000Z",
         "updated_at": "2021-03-25T18:09:41.000000Z"
     },
     {
-        "id" : "1189888888027",
-        "name" : "Cola em bastão",
-        "description" : "Notas auto-adesivas removíveis. 4 blocos de 100 folhas.",
-        "price" : 7.60,
-        "image" : "",
-        "created_at": "2021-03-25T15:13:05.000000Z",
-        "updated_at": "2021-03-25T18:09:41.000000Z"
-    },
-    {
-        "id" : "00111019289121027",
-        "name" : "Corretivo Líquido",
-        "description" : "Notas auto-adesivas removíveis. 4 blocos de 100 folhas.",
-        "price" : 13.90,
-        "image": "/img/00111019289121027/image.jpg",
+        "id": 1123,
+        "name": "Teclado gamer delta",
+        "description": "design e conforto para suas jogatinas",
+        "price": 45.9,
+        "color": "Preto",
+        "quantity": 20,
+        "line": "Delta",
+        "image": "/tecpaper/public/img/upload/1123/image.jpg",
         "created_at": "2021-03-25T15:13:05.000000Z",
         "updated_at": "2021-03-25T18:09:41.000000Z"
     }
-] 
+]
+
 ```
 
 ## 2. New Product (POST)
 
 
 ```URL
-http://tecpaper.tk/tecpaper/public/api/products/
+    https://api-cosmic.herokuapp.com/products
 ```
 
 **To include an image in the product and send it to the database, it is necessary to send it as Post multipart / form-data.**
@@ -95,11 +94,14 @@ http://tecpaper.tk/tecpaper/public/api/products/
 - #### Example with [Ion](https://github.com/koush/ion) (Android)
 ```JAVASCRIPT
     Ion.with(getContext())
-        .load("http://tecpaper.tk/tecpaper/public/api/products/")
-        .setMultipartParameter("id", "7891040091027")
-        .setMultipartParameter("name", "Mini post-it")
-        .setMultipartParameter("description", "Notas auto-adesivas removíveis. 4 blocos de 100 folhas.")
-        .setMultipartParameter("price", 4.25)
+        .load("https://api-cosmic.herokuapp.com/products")
+        .setMultipartParameter("id", "1122")
+        .setMultipartParameter("name", "Mouse Gamer")
+        .setMultipartParameter("description", "Design e conforto para suas jogatinas.")
+        .setMultipartParameter("price", 39.9)
+        .setMultipartParameter("color", "Preto")
+        .setMultipartParameter("quantity", 25)
+        .setMultipartParameter("line", 39.9)
         .setMultipartFile("image", "image/jpeg", new File("/sdcard/filename.jpeg"))
         .asJsonObject()
         .setCallback(...)

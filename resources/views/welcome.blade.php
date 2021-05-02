@@ -6,11 +6,14 @@
 
         <title>Dashboard - Cosmic API</title>
 
+        <!-- ICON -->
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-        <script src="{{ asset('css/app.css') }}"></script>
+        <script src="../css/app.css"></script>
 
         <style>
             body {
