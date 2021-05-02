@@ -29,42 +29,46 @@ class ProductController extends Controller
     public function post(Request $request)
     {
 
-        dd("post");
-
-
 //        if($request->update == "true"){ // METHOD PUT
 //            return $this->put($request);
 //        }
-//
-//        if ($request->id == null ||
-//            $request->name == null ||
-//            $request->description == null ||
-//            $request->price == null )
-//            return json_encode([
-//                "result" => "PARAMETROS INVALIDOS",
-//                "code" => 400
-//            ]);
-//
-//        if (Product::find($request->id) != null)
-//            return json_encode([
-//                "result" => "REGISTRO JA EXISTENTE",
-//                "code" => 400
-//            ]);
-//
-//        $product = new Product();
-//        $product->id = $request->id;
-//        $product->name = $request->name;
-//        $product->description = $request->description;
-//        $product->price = $request->price;
-//        $product->image = $this->uploadImage($request);
-//        $product->created_at = date("Y-m-d H:i:s", time());
-//        $product->updated_at = date("Y-m-d H:i:s", time());
-//        $product->save();
-//
-//        return json_encode([
-//            "result" => "REGISTRO INSERIDO",
-//            "code" => 200
-//        ]);
+
+        if ($request->id == null ||
+            $request->name == null ||
+            $request->description == null ||
+            $request->price == null ||
+            $request->color == null ||
+            $request->quantity == null ||
+            $request->line == null ||
+            $request->price == null )
+            return json_encode([
+                "result" => "PARAMETROS INVALIDOS",
+                "code" => 400
+            ]);
+
+        if (Product::find($request->id) != null)
+            return json_encode([
+                "result" => "REGISTRO JA EXISTENTE",
+                "code" => 400
+            ]);
+
+        $product = new Product();
+        $product->id = $request->id;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->color = $request->color;
+        $product->quantity = $request->quantity;
+        $product->line = $request->line;
+        $product->image = $this->uploadImage($request);
+        $product->created_at = date("Y-m-d H:i:s", time());
+        $product->updated_at = date("Y-m-d H:i:s", time());
+        $product->save();
+
+        return json_encode([
+            "result" => "REGISTRO INSERIDO",
+            "code" => 200
+        ]);
     }
 
     public function put(Request $request)
