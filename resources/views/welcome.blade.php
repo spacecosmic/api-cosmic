@@ -13,7 +13,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-        <script src="../css/app.css"></script>
+        <link rel="stylesheet" src="../css/app.css">
 
         <style>
             body {
