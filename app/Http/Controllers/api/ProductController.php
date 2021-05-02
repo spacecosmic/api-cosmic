@@ -11,27 +11,23 @@ class ProductController extends Controller
 {
     public function get(Request $request)
     {
-
-        dd("get");
-
 //        if ($request->pass != null){
 //            return $this->delete($request);
 //        }
-//
-//        $id = $request->id;
-//
-//        if($id == null){ // GET ALL PRODUCTS
-//            return Product::all();
-//        }else{ // GET A SPECIFIC PRODUCT
-//            return (Product::find($id) != null)
-//                ? Product::find($id)
-//                : json_encode([ "result" => "PRODUTO NAO ENCONTRADO", "code" => 404]);
-//        }
+
+
+        if($request->id == null){ // GET ALL PRODUCTS
+            return Product::all();
+        }else{ // GET A SPECIFIC PRODUCT
+            $id = $request->id;
+            return (Product::find($id) != null)
+                ? Product::find($id)
+                : json_encode([ "result" => "PRODUTO NAO ENCONTRADO", "code" => 404]);
+        }
     }
 
     public function post(Request $request)
     {
-
 
         dd("post");
 
