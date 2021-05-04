@@ -74,42 +74,38 @@ class ProductController extends Controller
     public function put(Request $request)
     {
 
-        dd("put");
+        $id = $request->id;
 
+        if ($request->id == null ||
+            $request->name == null ||
+            $request->description == null ||
+            $request->price == null )
+            return json_encode([
+                "result" => "PARAMETROS INVALIDOS",
+                "code" => 400
+            ]);
 
+        $product = Product::find($id);
+        if($product == null){
+            return json_encode([
+                "result" => "PRODUTO NAO ENCONTRADO",
+                "code" => 404
+            ]);
+        }
 
-//        $id = $request->id;
-//
-//        if ($request->id == null ||
-//            $request->name == null ||
-//            $request->description == null ||
-//            $request->price == null )
-//            return json_encode([
-//                "result" => "PARAMETROS INVALIDOS",
-//                "code" => 400
-//            ]);
-//
-//        $product = Product::find($id);
-//        if($product == null){
-//            return json_encode([
-//                "result" => "PRODUTO NAO ENCONTRADO",
-//                "code" => 404
-//            ]);
-//        }
-//
-//        $product->id = $request->id;
-//        $product->name = $request->name;
-//        $product->description = $request->description;
-//        $product->price = $request->price;
-//        $imagePath = $this->uploadImage($request);
-//        $product->image = ($imagePath != "") ? $imagePath : $product->image;
-//        $product->updated_at = date("Y-m-d H:i:s", time());
-//        $product->update();
-//
-//        return json_encode([
-//            "result" => "REGISTRO ATUALIZADO",
-//            "code" => 200
-//        ]);
+        $product->id = $request->id;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $imagePath = $this->uploadImage($request);
+        $product->image = ($imagePath != "") ? $imagePath : $product->image;
+        $product->updated_at = date("Y-m-d H:i:s", time());
+        $product->update();
+
+        return json_encode([
+            "result" => "REGISTRO ATUALIZADO",
+            "code" => 200
+        ]);
 
     }
 
