@@ -11,10 +11,6 @@ class ProductController extends Controller
 {
     public function get(Request $request)
     {
-//        if ($request->pass != null){
-//            return $this->delete($request);
-//        }
-
 
         if($request->id == null){ // GET ALL PRODUCTS
             return Product::all();
@@ -29,9 +25,9 @@ class ProductController extends Controller
     public function post(Request $request)
     {
 
-//        if($request->update == "true"){ // METHOD PUT
-//            return $this->put($request);
-//        }
+        if($request->update == "true"){ // METHOD PUT
+            return $this->put($request);
+        }
 
         if ($request->id == null ||
             $request->name == null ||
@@ -74,18 +70,13 @@ class ProductController extends Controller
     public function put(Request $request)
     {
 
-        $id = $request->id;
-
-        if ($request->id == null ||
-            $request->name == null ||
-            $request->description == null ||
-            $request->price == null )
+        if ($request->id == null)
             return json_encode([
-                "result" => "PARAMETROS INVALIDOS",
+                "result" => "PRODUTO NAO ENCONTRADO",
                 "code" => 400
             ]);
 
-        $product = Product::find($id);
+        $product = Product::find($request->id);
         if($product == null){
             return json_encode([
                 "result" => "PRODUTO NAO ENCONTRADO",
