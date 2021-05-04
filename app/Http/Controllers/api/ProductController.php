@@ -170,7 +170,7 @@ class ProductController extends Controller
     private function deletarDiretorio($id)
     {
         $path = public_path() . "/img/upload/" . $id . "/";
-        if(directoryExists($path)){
+        if(File::exists($path)){
             File::deleteDirectory($path);
         }
     }
