@@ -88,6 +88,9 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+        $product->color = $request->color;
+        $product->quantity = $request->quantity;
+        $product->line = $request->line;
         $imagePath = $this->uploadImage($request);
         $product->image = ($imagePath != "") ? $imagePath : $product->image;
         $product->updated_at = date("Y-m-d H:i:s", time());
