@@ -116,35 +116,31 @@ class ProductController extends Controller
     public function delete(Request $request)
     {
 
-        dd("delete");
+        $id = $request->id;
 
+        $json = ["result" => "", "code" => ""];
 
+        if($request->pass == env("ADMPASS")){
+            if($id != 0){
 
-//        $id = $request->id;
-//
-//        $json = ["result" => "", "code" => ""];
-//
-//        if($request->pass == env("ADMPASS")){
-//            if($id != 0){
-//
-//                $product = Product::findOrFail($id);
-//
-//                $product->delete();
-//                $this->deletarDiretorio($id);
-//
-//                $json['result'] = "REGISTRO DELETADO";
-//                $json['code'] = 200;
-//            }else{
-//
-//                $json['result'] = "PARAMETROS INVÁLIDOS, FORNEÇA UM ID";
-//                $json['code'] = 404;
-//            }
-//        }else{
-//            $json['result'] = "ACESSO NAO PERMITIDO";
-//            $json['code'] = 400;
-//        }
-//
-//        return json_encode($json);
+                $product = Product::findOrFail($id);
+
+                $product->delete();
+                $this->deletarDiretorio($id);
+
+                $json['result'] = "REGISTRO DELETADO";
+                $json['code'] = 200;
+            }else{
+
+                $json['result'] = "PARAMETROS INVÁLIDOS, FORNEÇA UM ID";
+                $json['code'] = 404;
+            }
+        }else{
+            $json['result'] = "ACESSO NAO PERMITIDO";
+            $json['code'] = 400;
+        }
+
+        return json_encode($json);
     }
 
     public function uploadImage(Request $request):string
@@ -165,7 +161,7 @@ class ProductController extends Controller
 
                 $request->file('image')->move($path, "image.jpg");
 
-                $fullPath = "/tecpaper/public/img/upload/{$request->id}/image.jpg";
+                $fullPath = "/img/upload/{$request->id}/image.jpg";
             }
         }
         return $fullPath;
