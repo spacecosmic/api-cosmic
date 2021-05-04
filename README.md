@@ -31,17 +31,20 @@ pass | Administrator password to delete database records.
 
 - #### Specific product
 ```url
-    https://api-cosmic.herokuapp.com/products?id={id}
+    https://api-cosmic.herokuapp.com/api/products?id={id}
 ```
 
 ```JSON
-// https://api-cosmic.herokuapp.com/products?id=1122
+// https://api-cosmic.herokuapp.com/api/products?id=123
 { 
-    "id": 1122,
+    "id": 123,
     "name": "Mouse Gamer",
     "description": "Degign e conforto para suas jogatinas.",
     "price": 39.9,
-    "image": "/tecpaper/public/img/upload/1122/image.jpg",
+    "color": "Preto",
+    "quantity": 50,
+    "line": "Messier",
+    "image": "/img/upload/1122/image.jpg",
     "created_at": "2021-03-25T15:13:05.000000Z",
     "updated_at": "2021-03-25T18:09:41.000000Z"
 }
@@ -49,32 +52,32 @@ pass | Administrator password to delete database records.
 
 - #### All products
 ```url
-    https://api-cosmic.herokuapp.com/products
+    https://api-cosmic.herokuapp.com/api/products
 ```
 
 ```JSON
 [
     {
-        "id": 1122,
-        "name": "Mouse gamer nebulosa",
-        "description": "design e conforto para suas jogatinas",
+        "id": 123,
+        "name": "Mouse gamer",
+        "description": "Design e conforto para suas jogatinas",
         "price": 39.9,
         "color": "Preto",
         "quantity": 25,
         "line": "Nebulosa",
-        "image": "/tecpaper/public/img/upload/1122/image.jpg",
+        "image": "/img/upload/1122/image.jpg",
         "created_at": "2021-03-25T15:13:05.000000Z",
         "updated_at": "2021-03-25T18:09:41.000000Z"
     },
     {
-        "id": 1123,
-        "name": "Teclado gamer delta",
-        "description": "design e conforto para suas jogatinas",
+        "id": 123456,
+        "name": "Teclado gamer",
+        "description": "Design e conforto para suas jogatinas",
         "price": 45.9,
-        "color": "Preto",
+        "color": "Branco",
         "quantity": 20,
         "line": "Delta",
-        "image": "/tecpaper/public/img/upload/1123/image.jpg",
+        "image": "/img/upload/1123/image.jpg",
         "created_at": "2021-03-25T15:13:05.000000Z",
         "updated_at": "2021-03-25T18:09:41.000000Z"
     }
@@ -86,7 +89,7 @@ pass | Administrator password to delete database records.
 
 
 ```URL
-    https://api-cosmic.herokuapp.com/products
+    https://api-cosmic.herokuapp.com/api/products
 ```
 
 **To include an image in the product and send it to the database, it is necessary to send it as Post multipart / form-data.**
@@ -94,14 +97,14 @@ pass | Administrator password to delete database records.
 - #### Example with [Ion](https://github.com/koush/ion) (Android)
 ```JAVASCRIPT
     Ion.with(getContext())
-        .load("https://api-cosmic.herokuapp.com/products")
-        .setMultipartParameter("id", "1122")
+        .load("https://api-cosmic.herokuapp.com/api/products")
+        .setMultipartParameter("id", "123")
         .setMultipartParameter("name", "Mouse Gamer")
         .setMultipartParameter("description", "Design e conforto para suas jogatinas.")
         .setMultipartParameter("price", 39.9)
         .setMultipartParameter("color", "Preto")
         .setMultipartParameter("quantity", 25)
-        .setMultipartParameter("line", 39.9)
+        .setMultipartParameter("line", "Andromeda")
         .setMultipartFile("image", "image/jpeg", new File("/sdcard/filename.jpeg"))
         .asJsonObject()
         .setCallback(...)
@@ -111,14 +114,17 @@ pass | Administrator password to delete database records.
 
 ```JAVASCRIPT
     RequestParams params = new RequestParams();
-        params.put("id", "7891040091027");
-        params.put("name", "Mini post-it");
-        params.put("description", "Notas auto-adesivas removíveis. 4 blocos de 100 folhas.");
-        params.put("price", 4.25);
+        params.put("id", "123");
+        params.put("name", "Mouse gamer");
+        params.put("description", "Design e conforto para suas jogatinas.");
+        params.put("price", 39.9);
+        params.put("color", "Preto");
+        params.put("quantity", 25);
+        params.put("line", "Andromeda");
         params.put("image", new FileInputStream(new File("/sdcard/filename.jpeg")), "filename.jpg");
         
         new AsyncHttpClient()
-            .post("http://tecpaper.tk/tecpaper/public/api/products/", 
+            .post("https://api-cosmic.herokuapp.com/api/products", 
                 params, 
                 new JsonHttpResponseHandler(){
                 @Override
@@ -143,7 +149,7 @@ pass | Administrator password to delete database records.
 ## 3. Update Product (POST)
 
 ```URL
-http://tecpaper.tk/tecpaper/public/api/products/
+    https://api-cosmic.herokuapp.com/api/products
 ```
 **The API is able to check the data provided and update the database, only what is necessary.**
 <br>
@@ -151,11 +157,14 @@ http://tecpaper.tk/tecpaper/public/api/products/
 - #### Example with [Ion](https://github.com/koush/ion) (Android)
 ```JAVASCRIPT
     Ion.with(getContext())
-        .load("http://tecpaper.tk/tecpaper/public/api/products/")
-        .setMultipartParameter("id", "7891040091027")
-        .setMultipartParameter("name", "Mini post-it")
-        .setMultipartParameter("description", "Notas auto-adesivas removíveis. 4 blocos de 100 folhas.")
+        .load("https://api-cosmic.herokuapp.com/api/products")
+        .setMultipartParameter("id", "123")
+        .setMultipartParameter("name", "Mouse gamer")
+        .setMultipartParameter("description", "Design e conforto para suas jogatinas.")
         .setMultipartParameter("price", 4.25)
+        .setMultipartParameter("color", "Preto")
+        .setMultipartParameter("quantity", 10)
+        .setMultipartParameter("line", "Andromeda")
         .setMultipartParameter("update", "true")
         .setMultipartFile("image", "image/jpeg", new File("/sdcard/filename.jpeg"))
         .asJsonObject()
@@ -166,15 +175,18 @@ http://tecpaper.tk/tecpaper/public/api/products/
 
 ```PHP
     RequestParams params = new RequestParams();
-        params.put("id", "7891040091027");
-        params.put("name", "Mini post-it");
-        params.put("description", "Notas auto-adesivas removíveis. 4 blocos de 100 folhas.");
+        params.put("id", "123");
+        params.put("name", "Mouse gamer");
+        params.put("description", "Design e conforto para suas jogatinas.");
         params.put("price", 4.25);
+        params.put("color", "Preto");
+        params.put("quantity", 10);
+        params.put("line", "Andromeda");
         params.put("update", "true");
         params.put("image", new FileInputStream(new File("/sdcard/filename.jpeg")), "filename.jpg");
         
         new AsyncHttpClient()
-            .post("http://tecpaper.tk/tecpaper/public/api/products/", 
+            .post("https://api-cosmic.herokuapp.com/api/products", 
                 params, 
                 new JsonHttpResponseHandler(){
                 @Override
@@ -199,18 +211,18 @@ http://tecpaper.tk/tecpaper/public/api/products/
 - #### Especific Product
 
 ```url
-http://tecpaper.tk/tecpaper/public/api/products?id={id}&pass={pass}
+    https://api-cosmic.herokuapp.com/api/products?id={id}&pass={pass}
 ```
 
 ```JSON
-// http://tecpaper.tk/tecpaper/public/api/products?id=123&pass=#####
+// https://api-cosmic.herokuapp.com/api/products?id=123&pass=#####
 { 
     "result" : "REGISTRO DELETADO",
     "code" : 200
 }
 ```
 ```JSON
-// http://tecpaper.tk/tecpaper/public/api/products?id=123&pass=123
+// https://api-cosmic.herokuapp.com/api/products?id=123&pass=123
 { 
     "result" : "ACESSO NAO PERMITIDO",
     "code": 400

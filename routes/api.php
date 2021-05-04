@@ -6,6 +6,5 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('Api')->group(function (){
     Route::get('/products', [ProductController::class, 'get']);
     Route::post('/products', [ProductController::class, 'post']);
-    Route::put('/products', [ProductController::class, 'put']);
     Route::delete('/products', [ProductController::class, 'delete']);
 });
